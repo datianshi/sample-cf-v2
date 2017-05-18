@@ -4,4 +4,5 @@ state.json
 director.yml
 env.sh
 terraform.tfstate
+terraform.tfstate.*
 terraform.tfstate.backup

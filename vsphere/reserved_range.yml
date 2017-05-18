@@ -1,4 +1,4 @@
 - type: replace
-  path: /networks/name=default/subnets/range=((internal_cidr))/reserved
+  path: /networks/name=default/subnets/range=((ert_internal_cidr))/reserved
   value:
   - 10.193.53.1-10.193.53.130

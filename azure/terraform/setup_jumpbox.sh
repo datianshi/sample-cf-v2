@@ -9,4 +9,5 @@ JUMPBOX_IP=$(terraform state show -state ${TSTATE_FILE} azurerm_public_ip.jb-pub
 
 
 ssh -i ${PRIVATE_KEY_PATH} ubuntu@${JUMPBOX_IP} 'rm -rf sample-cf-v2 && git clone https://github.com/datianshi/sample-cf-v2'
+ssh -i ${PRIVATE_KEY_PATH} ubuntu@${JUMPBOX_IP} 'cd sample-cf-v2 && git submodule init && gitsubmodule update'
 scp -i ${PRIVATE_KEY_PATH} ${TSTATE_FILE} ${ENV_FILE} ubuntu@${JUMPBOX_IP}:./sample-cf-v2/azure/terraform/
