@@ -426,6 +426,32 @@ instance_groups:
   properties:
     dropsonde: {enabled: true}
 
+- name: smoke-tests
+  azs: [z1]
+  instances: 1
+  lifecycle: errand
+  jobs:
+  - name: smoke-tests
+    release: cf
+    consumes: {}
+    provides: {}
+  vm_type: medium
+  stemcell: default
+  properties:
+    smoke_tests:
+      api: https://api.((system_domain))
+      apps_domain: ((system_domain))
+      user: admin
+      password: ((admin_user_password))
+      org: CF_SMOKE_TEST_ORG
+      space: CF_SMOKE_TEST_SPACE
+      skip_ssl_validation: true
+      use_existing_org: false
+      use_existing_space: false
+      cf_dial_timeout_in_seconds:
+  networks:
+  - name: ((default_network))
+
 properties:
   router:
     route_services_secret: ((route_service_secret))
