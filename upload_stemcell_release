@@ -1,3 +1,12 @@
+#!/bin/bash
+set -e
+
+source lib/common.sh
+iaas=$1
+check_argument ${iaas}
+
+
+
 director=$(bosh-cli int vsphere/director.yml --path /internal_ip)
 director_name=$(bosh-cli int vsphere/director.yml --path /director_name)
 
@@ -17,4 +26,4 @@ bosh-cli -e ${director_name} upload-release https://bosh.io/d/github.com/cloudfo
 bosh-cli -e ${director_name} upload-release https://bosh.io/d/github.com/cloudfoundry/capi-release?v=1.28.0
 bosh-cli -e ${director_name} upload-release https://bosh.io/d/github.com/cloudfoundry/loggregator?v=73
 bosh-cli -e ${director_name} upload-release https://bosh.io/d/github.com/cloudfoundry/uaa-release?v=32
-bosh-cli -e ${director_name} upload-stemcell https://bosh.io/d/stemcells/bosh-vsphere-esxi-ubuntu-trusty-go_agent
+bosh-cli -e ${director_name} upload-stemcell https://bosh.io/d/stemcells/bosh-${iaas}-esxi-ubuntu-trusty-go_agent
