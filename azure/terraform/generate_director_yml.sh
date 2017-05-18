@@ -19,7 +19,7 @@ function indexCidr() {
 internal_gw=$(indexCidr ${BOSH_CIDR} 1)
 internal_ip=$(indexCidr ${BOSH_CIDR} 6)
 
-ert_internal_gw=$(indexCidr ${BOSH_CIDR} 1)
+ert_internal_gw=$(indexCidr ${ERT_CIDR} 1)
 
 
 echo "director_name: bosh_azure" > ${DIRECTOR_CONFIG}
