@@ -12,7 +12,6 @@ releases:
 - {name: capi, version: latest}
 - {name: uaa, version: latest}
 
-
 stemcells:
 - alias: default
   os: ubuntu-trusty

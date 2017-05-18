@@ -4,21 +4,15 @@ azs:
 vm_types:
 - name: small
   cloud_properties:
-    cpu: 2
-    ram: 1024
-    disk: 3240
+    instance_type: Standard_D1
     storage_account_name: ((vm_storage_account_name))
 - name: medium
   cloud_properties:
-    cpu: 2
-    ram: 2048
-    disk: 3240
+    instance_type: Standard_D2
     storage_account_name: ((vm_storage_account_name))
 - name: large
   cloud_properties:
-    cpu: 2
-    ram: 4096
-    disk: 30_240
+    instance_type: Standard_D3
     storage_account_name: ((vm_storage_account_name))
 
 disk_types:
@@ -42,7 +36,7 @@ networks:
     cloud_properties:
       virtual_network_name: ((vnet_name))
       subnet_name: ((ert_subnet_name))
-      security_group: ((security_group))
+      security_group: ((default_security_group))
 - name: vip
   type: vip
 

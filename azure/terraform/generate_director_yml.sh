@@ -39,7 +39,7 @@ echo "client_id: ${TF_VAR_client_id}" >> ${DIRECTOR_CONFIG}
 echo "client_secret: ${TF_VAR_client_secret}" >> ${DIRECTOR_CONFIG}
 echo "resource_group_name: ${RESOURCE_GROUP}" >> ${DIRECTOR_CONFIG}
 echo "storage_account_name: ${STORAGE_ACCOUNT_NAME}" >> ${DIRECTOR_CONFIG}
-echo "security_group: ${SECURITY_GROUP}" >> ${DIRECTOR_CONFIG}
+echo "default_security_group: ${SECURITY_GROUP}" >> ${DIRECTOR_CONFIG}
 echo "ert_internal_cidr: ${ERT_CIDR}" >>${DIRECTOR_CONFIG}
 echo "ert_internal_gw: ${ert_internal_gw}" >>${DIRECTOR_CONFIG}
 echo "ert_subnet_name: ${ERT_SUBNET_NAME}" >> ${DIRECTOR_CONFIG}
