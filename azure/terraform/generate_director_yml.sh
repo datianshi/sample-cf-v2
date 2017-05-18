@@ -1,3 +1,5 @@
+#!/bin/bash
+
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 DIRECTOR_CONFIG="${DIR}/../director.yml"
 TSTATE_FILE="${DIR}/terraform.tfstate"
@@ -10,6 +12,9 @@ STORAGE_ACCOUNT_NAME=$(terraform state show -state ${TSTATE_FILE} azurerm_storag
 SECURITY_GROUP=$(terraform state show -state ${TSTATE_FILE} azurerm_network_security_group.cf_security_group | grep name | head -n 1 | awk '{print $3}')
 ERT_CIDR=$(terraform state show -state ${TSTATE_FILE} azurerm_subnet.ert_subnet | grep address_prefix | awk '{print $3}')
 ERT_SUBNET_NAME=$(terraform state show -state ${TSTATE_FILE} azurerm_subnet.ert_subnet | grep name | head -n 1 | awk '{print $3}')
+VM_STORAGE=$(terraform state show -state ${TSTATE_FILE} azurerm_storage_account.bosh_vms_storage_account_1 | grep name | head -n 1 | awk '{print $3}')
+
+vm_storage="*${VM_STORAGE::-1}*"
 
 function indexCidr() {
   INDEX=$(echo ${1} | sed "s/\(.*\)\.\(.*\)\.\(.*\)\..*/\1.\2.\3.${2}/g")
@@ -38,3 +43,4 @@ echo "security_group: ${SECURITY_GROUP}" >> ${DIRECTOR_CONFIG}
 echo "ert_internal_cidr: ${ERT_CIDR}" >>${DIRECTOR_CONFIG}
 echo "ert_internal_gw: ${ert_internal_gw}" >>${DIRECTOR_CONFIG}
 echo "ert_subnet_name: ${ERT_SUBNET_NAME}" >> ${DIRECTOR_CONFIG}
+echo "vm_storage_account_name: ${vm_storage}" >> ${DIRECTOR_CONFIG}

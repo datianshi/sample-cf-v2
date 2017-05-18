@@ -7,7 +7,7 @@ resource "azurerm_storage_account" "bosh_root_storage_account" {
   name                = "${var.env_short_name}root"
   resource_group_name = "${var.env_name}"
   location            = "${var.location}"
-  account_type        = "Standard_LRS"
+  account_type        = "Premium_LRS"
 }
 
 resource "azurerm_storage_account" "jumpbox_storage_account" {
