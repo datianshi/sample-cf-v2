@@ -1,0 +1,18 @@
+
+internal_ip: 10.193.53.130
+internal_cidr: 10.193.53.0/24 # CIDR range that BOSH will deploy to
+internal_gw: 10.193.53.1 # internal gateway
+internal_dns: 10.193.53.2 # internal gateway
+
+vcenter_ip: 10.193.53.11
+vcenter_user: administrator@vsphere.local
+vcenter_password: j9tW181QRJy7!
+vcenter_dc: Datacenter
+vcenter_vms: custom_bosh
+vcenter_templates: custom_bosh
+vcenter_ds: LUN01
+vcenter_disks: custom_bosh_disk
+vcenter_cluster: Cluster
+network_name: "VM Network"
+
+director_name: custom-bosh
