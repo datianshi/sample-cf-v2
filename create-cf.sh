@@ -19,6 +19,11 @@ bosh-cli -n -e https://${director}:25555 alias-env ${director_name} \
 
 DIRECTOR_UUID=$(bosh-cli -e ${director_name} environment --json | jq -r '.Tables[].Rows[] | select(.[0] == "UUID") | .[1]')
 
+if [ "X$DIRECTOR_UUID"== "X"]
+then
+  DIRECTOR_UUID=$(bosh-cli -e ${director_name} environment --json | jq -r '.Tables[].Rows[] | .uuid')
+fi
+
 bosh-cli int cloudfoundry.yml --vars-store creds.yml \
             -o common/network_jobs.yml \
             -v director_uuid=${DIRECTOR_UUID} \
