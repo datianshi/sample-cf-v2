@@ -1,0 +1,4 @@
+- type: replace
+  path: /networks/name=default/subnets/range=((internal_cidr))/reserved
+  value:
+  - 192.168.0.0 - 192.168.0.10

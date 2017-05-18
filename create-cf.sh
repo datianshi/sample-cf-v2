@@ -1,14 +1,21 @@
 
-director_name=$(bosh-cli int vsphere/director.yml --path /director_name)
-director=$(bosh-cli int vsphere/director.yml --path /internal_ip)
+#!/bin/bash
+set -e
 
+source lib/common.sh
+iaas=$1
+check_argument ${iaas}
+
+
+director_name=$(bosh-cli int ${iaas}/director.yml --path /director_name)
+director=$(bosh-cli int ${iaas}/director.yml --path /internal_ip)
 
 
 export BOSH_CLIENT=admin
-export BOSH_CLIENT_SECRET=$(bosh-cli int vsphere/creds.yml --path /admin_password)
+export BOSH_CLIENT_SECRET=$(bosh-cli int ${iaas}/creds.yml --path /admin_password)
 
 bosh-cli -n -e https://${director}:25555 alias-env ${director_name} \
-  --ca-cert <(bosh-cli int vsphere/creds.yml --path /default_ca/ca)
+  --ca-cert <(bosh-cli int ${iaas}/creds.yml --path /default_ca/ca)
 
 DIRECTOR_UUID=$(bosh-cli -e custom-bosh environment --json | jq -r '.Tables[].Rows[] | select(.[0] == "UUID") | .[1]')
 

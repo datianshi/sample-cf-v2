@@ -1,8 +1,5 @@
 azs:
 - name: z1
-  cloud_properties:
-    datacenters:
-    - clusters: [((vcenter_cluster)): {}]
 
 vm_types:
 - name: small
@@ -34,13 +31,17 @@ networks:
   - range: ((ert_internal_cidr))
     gateway: ((ert_internal_gw))
     azs: [z1]
-    dns: [((dns_server))]
+    dns: [168.63.129.16]
     reserved: []
     static:
     - ((postgres_sql_ip))
     - ((ha_proxy_ip))
     cloud_properties:
-      name: ((ert_network_name))
+      virtual_network_name: ((vnet_name))
+      subnet_name: ((ert_subnet_name))
+      security_group: ((security_group))
+- name: vip
+  type: vip
 
 compilation:
   workers: 5

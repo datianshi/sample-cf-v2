@@ -2,3 +2,6 @@ creds.yml
 cf.yml
 state.json
 director.yml
+env.sh
+terraform.tfstate
+terraform.tfstate.backup
