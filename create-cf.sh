@@ -17,7 +17,7 @@ export BOSH_CLIENT_SECRET=$(bosh-cli int ${iaas}/creds.yml --path /admin_passwor
 bosh-cli -n -e https://${director}:25555 alias-env ${director_name} \
   --ca-cert <(bosh-cli int ${iaas}/creds.yml --path /default_ca/ca)
 
-DIRECTOR_UUID=$(bosh-cli -e custom-bosh environment --json | jq -r '.Tables[].Rows[] | select(.[0] == "UUID") | .[1]')
+DIRECTOR_UUID=$(bosh-cli -e ${director_name} environment --json | jq -r '.Tables[].Rows[] | select(.[0] == "UUID") | .[1]')
 
 bosh-cli int cloudfoundry.yml --vars-store creds.yml \
             -o common/network_jobs.yml \
