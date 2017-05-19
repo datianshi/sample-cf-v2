@@ -13,6 +13,7 @@ SECURITY_GROUP=$(terraform state show -state ${TSTATE_FILE} azurerm_network_secu
 ERT_CIDR=$(terraform state show -state ${TSTATE_FILE} azurerm_subnet.ert_subnet | grep address_prefix | awk '{print $3}')
 ERT_SUBNET_NAME=$(terraform state show -state ${TSTATE_FILE} azurerm_subnet.ert_subnet | grep name | head -n 1 | awk '{print $3}')
 VM_STORAGE=$(terraform state show -state ${TSTATE_FILE} azurerm_storage_account.bosh_vms_storage_account_1 | grep name | head -n 1 | awk '{print $3}')
+WEB_LOAD_BALANCER=$(terraform state show -state ${TSTATE_FILE} azurerm_lb.web | grep name | sed -n 2p | awk '{print $3}')
 
 vm_storage="*${VM_STORAGE::-1}*"
 
@@ -43,4 +44,5 @@ echo "default_security_group: ${SECURITY_GROUP}" >> ${DIRECTOR_CONFIG}
 echo "ert_internal_cidr: ${ERT_CIDR}" >>${DIRECTOR_CONFIG}
 echo "ert_internal_gw: ${ert_internal_gw}" >>${DIRECTOR_CONFIG}
 echo "ert_subnet_name: ${ERT_SUBNET_NAME}" >> ${DIRECTOR_CONFIG}
-echo "vm_storage_account_name: ${vm_storage}" >> ${DIRECTOR_CONFIG}
+echo "vm_storage_account_name: \"${vm_storage}\"" >> ${DIRECTOR_CONFIG}
+echo "web_load_balancer: ${WEB_LOAD_BALANCER}" >> ${DIRECTOR_CONFIG}
