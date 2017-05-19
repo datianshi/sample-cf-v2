@@ -4,15 +4,15 @@ azs:
 vm_types:
 - name: small
   cloud_properties:
-    instance_type: Standard_D1
+    instance_type: Standard_DS1
     storage_account_name: ((vm_storage_account_name))
 - name: medium
   cloud_properties:
-    instance_type: Standard_D2
+    instance_type: Standard_DS2
     storage_account_name: ((vm_storage_account_name))
 - name: large
   cloud_properties:
-    instance_type: Standard_D3
+    instance_type: Standard_DS3
     storage_account_name: ((vm_storage_account_name))
 
 disk_types:
