@@ -29,7 +29,7 @@ networks:
   subnets:
   - range: ((ert_internal_cidr))
     gateway: ((ert_internal_gw))
-    azs: [z1, z2, z3]
+    azs: [z1]
     dns: [8.8.8.8]
     reserved: []
     cloud_properties:
