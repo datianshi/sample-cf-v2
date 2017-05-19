@@ -33,7 +33,9 @@ echo "ert_internal_cidr: ${ERT_CIDR}" >>${DIRECTOR_CONFIG}
 echo "ert_internal_gw: ${ert_internal_gw}" >>${DIRECTOR_CONFIG}
 echo "ert_subnet_id: ${ERT_SUBNET_ID}" >> ${DIRECTOR_CONFIG}
 echo "region": ${TF_VAR_aws_region} >> ${DIRECTOR_CONFIG}
+echo "az": ${TF_VAR_az1} >> ${DIRECTOR_CONFIG}
 echo "access_key_id": ${TF_VAR_aws_access_key} >> ${DIRECTOR_CONFIG}
 echo "secret_access_key": ${TF_VAR_aws_secret_key} >> ${DIRECTOR_CONFIG}
 echo "default_key_name": ${TF_VAR_aws_key_name} >> ${DIRECTOR_CONFIG}
 echo "web_load_balancer": ${WEB_LOAD_BALANCER} >> ${DIRECTOR_CONFIG}
+echo "private_key": "${DIR}/$(basename $PRIVATE_KEY_PATH)" >> ${DIRECTOR_CONFIG}
