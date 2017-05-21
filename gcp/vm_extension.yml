@@ -1,0 +1,8 @@
+- type: replace
+  path: /vm_extensions?
+  value:
+  - name: web_load_balancer
+    cloud_properties:
+      target_pool: ((cf_public_target_pool))
+      tags:
+        - ((cf_public_firewall_tag))

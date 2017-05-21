@@ -1,0 +1,52 @@
+azs:
+- name: z1
+  cloud_properties:
+    zone: ((zone))
+
+vm_types:
+- name: small
+  cloud_properties:
+    machine_type: n1-standard-2
+    root_disk_size_gb: 20
+    root_disk_type: pd-ssd
+- name: medium
+  cloud_properties:
+    machine_type: n1-standard-2
+    root_disk_size_gb: 30
+    root_disk_type: pd-ssd
+- name: large
+  cloud_properties:
+    machine_type: n1-standard-2
+    root_disk_size_gb: 50
+    root_disk_type: pd-ssd
+
+disk_types:
+- name: small
+  disk_size: 3000
+- name: medium
+  disk_size: 10_000
+- name: large
+  disk_size: 50_000
+
+networks:
+- name: default
+  type: manual
+  subnets:
+  - range: ((ert_internal_cidr))
+    gateway: ((ert_internal_gw))
+    azs: [z1]
+    dns: [8.8.8.8]
+    cloud_properties:
+      network_name: ((network))
+      subnetwork_name: ((ert_subnetwork))
+      ephemeral_external_ip: true
+      tags: ((ert_tags))
+- name: vip
+  type: vip
+
+compilation:
+  workers: 5
+  reuse_compilation_vms: true
+  az: z1
+  vm_type: default
+  network: default
