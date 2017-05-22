@@ -10,7 +10,7 @@ BOSH_SUBNET_NAME=$(terraform state show -state ${TSTATE_FILE} google_compute_sub
 ERT_CIDR=$(terraform state show -state ${TSTATE_FILE} google_compute_subnetwork.cf-private-subnet-1 | grep ip_cidr_range | awk '{print $3}')
 ERT_SUBNET_NAME=$(terraform state show -state ${TSTATE_FILE} google_compute_subnetwork.cf-private-subnet-1 | grep name | awk '{print $3}')
 CF_PUBLIC_TARGET_POOL=$(terraform state show -state ${TSTATE_FILE} google_compute_target_pool.cf-public | grep name | awk '{print $3}')
-JSON_KEY=$(cat account.json)
+JSON_KEY=$(cat account.json | sed 's/^\(.*\)$/  \1/g')
 
 # WEB_LOAD_BALANCER=$(terraform state show -state ${TSTATE_FILE} aws_elb.cfrouter | grep name | tail -n 1 | awk '{print $3}')
 
@@ -39,7 +39,7 @@ echo "ert_subnet_name: ${ERT_SUBNET_NAME}" >> ${DIRECTOR_CONFIG}
 
 echo "zone": ${TF_VAR_zone} >> ${DIRECTOR_CONFIG}
 echo "project_id": ${TF_VAR_projectid} >> ${DIRECTOR_CONFIG}
-echo -e "json_key: |\n${JSON_KEY}" >> ${DIRECTOR_CONFIG}
+echo "json_key: | ${JSON_KEY}" >> ${DIRECTOR_CONFIG}
 echo -e "tags: \n- internal\n- no-ip" >> ${DIRECTOR_CONFIG}
 echo -e "ert_tags: \n- internal\n- no-ip" >> ${DIRECTOR_CONFIG}
 echo -e "cf_public_target_pool: ${CF_PUBLIC_TARGET_POOL}" >> ${DIRECTOR_CONFIG}

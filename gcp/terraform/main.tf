@@ -141,6 +141,12 @@ chmod -R 777 /share
 wget https://releases.hashicorp.com/terraform/0.7.7/terraform_0.7.7_linux_amd64.zip
 unzip terraform*.zip -d /usr/local/bin
 rm /etc/motd
+
+# Install tools
+apt-get install git
+wget -O bosh-cli https://s3.amazonaws.com/bosh-cli-artifacts/bosh-cli-2.0.16-linux-amd64
+chmod +x bosh-cli && mv bosh-cli /usr/local/bin
+wget -O terraform.zip https://releases.hashicorp.com/terraform/0.9.5/terraform_0.9.5_linux_amd64.zip?_ga=2.183333606.1130945761.1495122634-313454480.1491582161 && unzip terraform.zip && chmod +x terraform && mv terraform /usr/local/bin/
 EOT
 
   service_account {
