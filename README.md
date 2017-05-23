@@ -13,6 +13,7 @@
 * Create IAAS (gcp/azure/aws).
 
 ```
+source env.sh
 cd ${IAAS}/terraform
 terraform apply
 ./setup_jumpbox.sh
@@ -21,6 +22,7 @@ terraform apply
 * ssh into the jumpbox (Optional: to save the bandwidth) to create director.yml
 
 ```
+source env.sh
 cd sample-cf-v2
 ${IAAS}/terraform/generate_director_yml.sh
 ./create_bosh.sh ${IAAS}
