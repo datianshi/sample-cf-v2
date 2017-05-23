@@ -13,4 +13,4 @@
 - type: replace
   path: /instance_groups/name=router/networks
   value:
-  - router  
+  - name: router  
