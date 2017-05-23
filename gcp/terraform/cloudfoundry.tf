@@ -53,7 +53,7 @@ resource "google_compute_address" "cf-tcp" {
 // HTTP Router Health check
 resource "google_compute_http_health_check" "cf-public" {
   name                = "${var.prefix}cf-public"
-  host                = "api.${google_compute_address.cf.address}.xip.io"
+  host                = "api.${var.cfdomain}"
   request_path        = "/info"
   check_interval_sec  = 30
   timeout_sec         = 5

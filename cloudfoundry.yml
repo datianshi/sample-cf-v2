@@ -982,8 +982,16 @@ variables:
   type: certificate
   options:
     is_ca: false
-    common_name: blobstore
+    common_name: capi
     ca: default_ca
+
+- name: router_cert
+  type: certificate
+  options:
+    is_ca: false
+    common_name: router_front
+    ca: default_ca
+
 
 - name: uaa_saml_provider_cert
   type: certificate

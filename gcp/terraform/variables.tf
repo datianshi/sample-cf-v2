@@ -1,5 +1,7 @@
 // Easier mainteance for updating GCE image string
 
+variable "cfdomain" {}
+
 variable "latest_ubuntu" {
     type = "string"
     default = "ubuntu-1404-trusty-v20161109"

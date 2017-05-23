@@ -2,3 +2,10 @@
   path: /instance_groups/name=router/vm_extensions?
   value:
   - web_load_balancer
+
+- type: replace
+  path: /instance_groups/name=router/properties/router?
+  value:
+    enable_ssl: true
+    ssl_cert: ((router_cert.cert))
+    ssl_key: ((router_cert.private_key))
