@@ -46,7 +46,6 @@ resource "google_compute_ssl_certificate" "ssl-cert" {
 resource "google_compute_http_health_check" "cf" {
   name = "cf-public"
 
-  host                = "api.${var.cfdomain}"
   port                = 8080
   request_path        = "/health"
   check_interval_sec  = 30

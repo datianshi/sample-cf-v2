@@ -43,8 +43,24 @@ networks:
     cloud_properties:
       network_name: ((network))
       subnetwork_name: ((ert_subnetwork))
-      ephemeral_external_ip: true
+      ephemeral_external_ip: false
       tags: ((ert_tags))
+- name: router
+  type: manual
+  subnets:
+  - range: ((ert_internal_cidr))
+    gateway: ((ert_internal_gw))
+    azs: [z1]
+    dns: [8.8.8.8]
+    reserved: []
+    static:
+    - ((postgres_sql_ip))
+    - ((ha_proxy_ip))
+    cloud_properties:
+      network_name: ((network))
+      subnetwork_name: ((ert_subnetwork))
+      ephemeral_external_ip: true
+      tags: ((router_tags))
 - name: vip
   type: vip
 

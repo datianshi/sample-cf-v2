@@ -9,3 +9,8 @@
     enable_ssl: true
     ssl_cert: ((router_cert.certificate))
     ssl_key: ((router_cert.private_key))
+
+- type: replace
+  path: /instance_groups/name=router/networks
+  value:
+  - router  

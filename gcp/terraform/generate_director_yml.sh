@@ -45,5 +45,6 @@ echo -e "gcp_credentials_json: |" >> ${DIRECTOR_CONFIG}
 echo "${JSON_KEY}" >> ${DIRECTOR_CONFIG}
 echo -e "tags: \n- internal\n- no-ip" >> ${DIRECTOR_CONFIG}
 echo -e "ert_tags: \n- internal\n- no-ip" >> ${DIRECTOR_CONFIG}
+echo -e "router_tags: \n- internal" >> ${DIRECTOR_CONFIG}
 echo -e "cf_public_backend_service: ${CF_PUBLIC_BACKEND_SERVICE}" >> ${DIRECTOR_CONFIG}
 echo -e "cf_public_firewall_tag: cf-public" >> ${DIRECTOR_CONFIG}
