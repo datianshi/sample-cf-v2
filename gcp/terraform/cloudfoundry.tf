@@ -41,7 +41,7 @@ resource "google_compute_firewall" "cf-tcp-public" {
 }
 
 // Static IP address for HTTP forwarding rule
-resource "google_compute_address" "cf" {
+resource "google_compute_global_address" "cf" {
   name = "${var.prefix}cf"
 }
 
@@ -50,94 +50,8 @@ resource "google_compute_address" "cf-tcp" {
   name = "${var.prefix}cf-tcp"
 }
 
-// HTTP Router Health check
-resource "google_compute_http_health_check" "cf-public" {
-  name                = "${var.prefix}cf-public"
-  host                = "api.${var.cfdomain}"
-  request_path        = "/info"
-  check_interval_sec  = 30
-  timeout_sec         = 5
-  healthy_threshold   = 10
-  unhealthy_threshold = 2
-  port = 80
-}
-
-// TCP Router Health check
-resource "google_compute_http_health_check" "cf-tcp-public" {
-  name                = "${var.prefix}cf-tcp-public"
-  request_path        = "/health"
-  check_interval_sec  = 30
-  timeout_sec         = 5
-  healthy_threshold   = 10
-  unhealthy_threshold = 2
-  port = 80
-}
-
-// HTTP Load balancing target pool
-resource "google_compute_target_pool" "cf-public" {
-  name = "${var.prefix}cf-public"
-
-  health_checks = [
-    "${google_compute_http_health_check.cf-public.name}"
-  ]
-}
-
-// TCP Router Load balancing target pool
-resource "google_compute_target_pool" "cf-tcp-public" {
-  name = "${var.prefix}cf-tcp-public"
-
-  health_checks = [
-    "${google_compute_http_health_check.cf-tcp-public.name}"
-  ]
-}
-
-// HTTP forwarding rule
-resource "google_compute_forwarding_rule" "cf-http" {
-  name        = "${var.prefix}cf-http"
-  target      = "${google_compute_target_pool.cf-public.self_link}"
-  port_range  = "80"
-  ip_protocol = "TCP"
-  ip_address  = "${google_compute_address.cf.address}"
-}
-
-// HTTPS forwarding rule
-resource "google_compute_forwarding_rule" "cf-https" {
-  name        = "${var.prefix}cf-https"
-  target      = "${google_compute_target_pool.cf-public.self_link}"
-  port_range  = "443"
-  ip_protocol = "TCP"
-  ip_address  = "${google_compute_address.cf.address}"
-}
-
-// SSH forwarding rule
-resource "google_compute_forwarding_rule" "cf-ssh" {
-  name        = "${var.prefix}cf-ssh"
-  target      = "${google_compute_target_pool.cf-public.self_link}"
-  port_range  = "2222"
-  ip_protocol = "TCP"
-  ip_address  = "${google_compute_address.cf.address}"
-}
-
-// WSS forwarding rule
-resource "google_compute_forwarding_rule" "cf-wss" {
-  name        = "${var.prefix}cf-wss"
-  target      = "${google_compute_target_pool.cf-public.self_link}"
-  port_range  = "4443"
-  ip_protocol = "TCP"
-  ip_address  = "${google_compute_address.cf.address}"
-}
-
-// TCP forwarding rule
-resource "google_compute_forwarding_rule" "cf-tcp" {
-  name        = "${var.prefix}cf-tcp"
-  target      = "${google_compute_target_pool.cf-tcp-public.self_link}"
-  port_range  = "1024-1123"
-  ip_protocol = "TCP"
-  ip_address  = "${google_compute_address.cf-tcp.address}"
-}
-
 output "ip" {
-    value = "${google_compute_address.cf.address}"
+    value = "${google_compute_global_address.cf.address}"
 }
 
 output "tcp_ip" {

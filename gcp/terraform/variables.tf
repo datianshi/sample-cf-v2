@@ -1,6 +1,8 @@
 // Easier mainteance for updating GCE image string
 
 variable "cfdomain" {}
+variable "cfsslcert" {}
+variable "cfsslkey" {}
 
 variable "latest_ubuntu" {
     type = "string"

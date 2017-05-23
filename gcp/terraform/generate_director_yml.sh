@@ -10,7 +10,8 @@ BOSH_CIDR=$(terraform state show -state ${TSTATE_FILE} google_compute_subnetwork
 BOSH_SUBNET_NAME=$(terraform state show -state ${TSTATE_FILE} google_compute_subnetwork.bosh-subnet-1 | grep name | awk '{print $3}')
 ERT_CIDR=$(terraform state show -state ${TSTATE_FILE} google_compute_subnetwork.cf-private-subnet-1 | grep ip_cidr_range | awk '{print $3}')
 ERT_SUBNET_NAME=$(terraform state show -state ${TSTATE_FILE} google_compute_subnetwork.cf-private-subnet-1 | grep name | awk '{print $3}')
-CF_PUBLIC_TARGET_POOL=$(terraform state show -state ${TSTATE_FILE} google_compute_target_pool.cf-public | grep name | awk '{print $3}')
+CF_PUBLIC_BACKEND_SERVICE=$(terraform state show -state ${TSTATE_FILE} google_compute_backend_service.ert_http_lb_backend_service | grep name | head -n 1 | awk '{print $3}')
+
 JSON_KEY=$(cat ${ACCOUNT_FILE} | sed 's/^\(.*\)$/  \1/g')
 
 # WEB_LOAD_BALANCER=$(terraform state show -state ${TSTATE_FILE} aws_elb.cfrouter | grep name | tail -n 1 | awk '{print $3}')
@@ -44,5 +45,5 @@ echo -e "gcp_credentials_json: |" >> ${DIRECTOR_CONFIG}
 echo "${JSON_KEY}" >> ${DIRECTOR_CONFIG}
 echo -e "tags: \n- internal\n- no-ip" >> ${DIRECTOR_CONFIG}
 echo -e "ert_tags: \n- internal\n- no-ip" >> ${DIRECTOR_CONFIG}
-echo -e "cf_public_target_pool: ${CF_PUBLIC_TARGET_POOL}" >> ${DIRECTOR_CONFIG}
+echo -e "cf_public_backend_service: ${CF_PUBLIC_BACKEND_SERVICE}" >> ${DIRECTOR_CONFIG}
 echo -e "cf_public_firewall_tag: cf-public" >> ${DIRECTOR_CONFIG}

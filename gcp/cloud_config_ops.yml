@@ -3,6 +3,6 @@
   value:
   - name: web_load_balancer
     cloud_properties:
-      target_pool: ((cf_public_target_pool))
+      backend_service: ((cf_public_backend_service))
       tags:
         - ((cf_public_firewall_tag))
