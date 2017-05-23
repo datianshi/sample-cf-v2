@@ -7,5 +7,5 @@
   path: /instance_groups/name=router/properties/router?
   value:
     enable_ssl: true
-    ssl_cert: ((router_cert.cert))
+    ssl_cert: ((router_cert.certificate))
     ssl_key: ((router_cert.private_key))
