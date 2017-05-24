@@ -21,7 +21,7 @@ resource "google_compute_firewall" "cf-public" {
 
   allow {
     protocol = "tcp"
-    ports    = ["80", "443", "2222", "4443"]
+    ports    = ["80", "443", "2222", "4443", "8080"]
   }
 
   target_tags = ["cf-public"]

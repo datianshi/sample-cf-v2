@@ -10,6 +10,7 @@ resource "google_compute_backend_service" "ert_http_lb_backend_service" {
   protocol    = "HTTP"
   timeout_sec = 10
   enable_cdn  = false
+  session_affinity = "CLIENT_IP"
 
   backend {
     group = "${google_compute_instance_group.ert-http-lb.self_link}"
