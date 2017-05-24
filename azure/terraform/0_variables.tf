@@ -25,3 +25,15 @@ variable "vm_admin_public_key" {}
 variable "vnet_cidr" {}
 variable "subnet_infra_cidr" {}
 variable "subnet_ert_cidr" {}
+
+variable another_site_gateway_ip {
+  default = "50.68.20.74"
+}
+
+variable another_site_cidr {
+  default = "10.0.0.0/24"
+}
+
+variable gateway_subnet_cidr {
+  default = "192.168.10.0/24"
+}

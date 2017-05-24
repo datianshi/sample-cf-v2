@@ -1,0 +1,41 @@
+variable "another_site_vpn_ip" {
+    description = "The VPN IP for another site"
+    default = "40.83.151.130"
+}
+
+variable "another_site_vpn_cidr" {
+    description = "The VPN IP for another site"
+    default = "10.0.10.0/24"
+}
+
+variable "vpc_id" {}
+
+resource "aws_vpn_gateway" "vpn_gw" {
+  vpc_id = "${var.vpc_id}"
+
+  tags {
+    Name = "vpn_gateway_aws"
+  }
+}
+
+resource "aws_customer_gateway" "customer_gateway" {
+  bgp_asn    = 65000
+  ip_address = "${var.another_site_vpn_ip}"
+  type       = "ipsec.1"
+
+  tags {
+    Name = "customer-gateway"
+  }
+}
+
+resource "aws_vpn_connection" "main" {
+  vpn_gateway_id      = "${aws_vpn_gateway.vpn_gw.id}"
+  customer_gateway_id = "${aws_customer_gateway.customer_gateway.id}"
+  type                = "ipsec.1"
+  static_routes_only  = true
+}
+
+resource "aws_vpn_connection_route" "TO_VPC1" {
+  destination_cidr_block = "${var.another_site_vpn_cidr}"
+  vpn_connection_id      = "${aws_vpn_connection.main.id}"
+}
