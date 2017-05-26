@@ -16,7 +16,7 @@ conn tunnel_1
   leftsubnet=10.0.0.0/24
   leftauth=psk
   right=<%= ENV['PUBLIC_RIGHT_IP'] %>
-  rightsubnet=192.168.0.0/16
+  rightsubnet=<%= ENV['RIGHT_SUBNET_CIDR'] %>
   rightauth=psk
   ike=aes128-sha1-modp1024
   esp=aes128-sha1-modp1024

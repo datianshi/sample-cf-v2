@@ -9,7 +9,7 @@ resource "azurerm_network_interface" "jumpbox_nic" {
     name                          = "${var.env_name}-jumpbox-ip-config"
     subnet_id                     = "${azurerm_subnet.opsman_and_director_subnet.id}"
     private_ip_address_allocation = "static"
-    private_ip_address            = "192.168.0.4"
+    private_ip_address            = "10.0.16.230"
     public_ip_address_id          = "${azurerm_public_ip.jb-public-ip.id}"
   }
 }

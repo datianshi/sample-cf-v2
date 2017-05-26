@@ -37,3 +37,5 @@ variable another_site_cidr {
 variable gateway_subnet_cidr {
   default = "192.168.10.0/24"
 }
+
+variable app_gateway_subnet {}

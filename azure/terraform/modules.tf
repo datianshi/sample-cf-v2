@@ -7,4 +7,9 @@ module "vpn" {
   resource_group_name = "${azurerm_resource_group.pcf_resource_group.name}"
   location = "${azurerm_resource_group.pcf_resource_group.location}"
   virtual_network_name = "${azurerm_virtual_network.pcf_virtual_network.name}"
+  vm_admin_username = "${var.vm_admin_username}"
+  vm_admin_password = "${var.vm_admin_password}"
+  vm_admin_public_key = "${var.vm_admin_public_key}"
+  env_short_name = "${var.env_short_name}"
+  public_subnet_id = "${azurerm_subnet.opsman_and_director_subnet.id}"
 }

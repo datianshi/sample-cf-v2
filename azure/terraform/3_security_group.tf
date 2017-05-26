@@ -153,6 +153,19 @@ resource "azurerm_network_security_group" "cf_security_group" {
     source_address_prefix      = "Internet"
     destination_address_prefix = "*"
   }
+
+  security_rule {
+    name                       = "https-vpn"
+    priority                   = 211
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "*"
+    source_port_range          = "*"
+    destination_port_range     = 443
+    source_address_prefix      = "10.0.0.0/20"
+    destination_address_prefix = "*"
+  }
+
 }
 
 resource "azurerm_network_security_group" "open-ssh" {

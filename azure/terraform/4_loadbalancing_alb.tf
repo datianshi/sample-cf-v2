@@ -15,7 +15,9 @@ resource "azurerm_lb" "web" {
 
   frontend_ip_configuration = {
     name                 = "frontendip"
-    public_ip_address_id = "${azurerm_public_ip.web-lb-public-ip.id}"
+    subnet_id = "${azurerm_subnet.opsman_and_director_subnet.id}"
+    private_ip_address = "10.0.16.200"
+    private_ip_address_allocation = "static"
   }
 }
 
