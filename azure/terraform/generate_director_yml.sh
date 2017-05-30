@@ -32,6 +32,9 @@ echo "director_name: bosh_azure" > ${DIRECTOR_CONFIG}
 echo "internal_cidr: ${BOSH_CIDR}" >>${DIRECTOR_CONFIG}
 echo "internal_gw: ${internal_gw}" >> ${DIRECTOR_CONFIG}
 echo "internal_ip: ${internal_ip}" >> ${DIRECTOR_CONFIG}
+echo "haproxy_internal_cidr: ${BOSH_CIDR}" >>${DIRECTOR_CONFIG}
+echo "haproxy_internal_gw: ${internal_gw}" >> ${DIRECTOR_CONFIG}
+echo "haproxy_subnet_name: ${SUBNET}" >> ${DIRECTOR_CONFIG}
 echo "vnet_name: ${NETWORK}" >> ${DIRECTOR_CONFIG}
 echo "subnet_name: ${SUBNET}" >> ${DIRECTOR_CONFIG}
 echo "subscription_id: ${TF_VAR_subscription_id}" >> ${DIRECTOR_CONFIG}

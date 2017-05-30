@@ -37,6 +37,20 @@ networks:
       virtual_network_name: ((vnet_name))
       subnet_name: ((ert_subnet_name))
       security_group: ((default_security_group))
+- name: haproxy
+  type: manual
+  subnets:
+  - range: ((haproxy_internal_cidr))
+    gateway: ((haproxy_internal_gw))
+    azs: [z1]
+    dns: [168.63.129.16]
+    reserved: []
+    static:
+    - ((my_proxy_ip))
+    cloud_properties:
+      virtual_network_name: ((vnet_name))
+      subnet_name: ((haproxy_subnet_name))
+      security_group: ((default_security_group))
 - name: vip
   type: vip
 
