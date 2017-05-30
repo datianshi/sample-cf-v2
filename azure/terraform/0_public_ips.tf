@@ -30,3 +30,10 @@ resource "azurerm_public_ip" "jb-public-ip" {
   resource_group_name          = "${azurerm_resource_group.pcf_resource_group.name}"
   public_ip_address_allocation = "static"
 }
+
+resource "azurerm_public_ip" "pub_ip_id_opsman_vm" {
+  name                         = "pub_ip_id_opsman_vm"
+  location                     = "${var.location}"
+  resource_group_name          = "${azurerm_resource_group.pcf_resource_group.name}"
+  public_ip_address_allocation = "static"
+}

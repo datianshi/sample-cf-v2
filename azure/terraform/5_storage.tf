@@ -25,6 +25,22 @@ resource "azurerm_storage_container" "jumpbox_storage_container" {
   container_access_type = "private"
 }
 
+resource "azurerm_storage_account" "opsmgr_storage_account" {
+  name                = "${var.env_short_name}opsmgr"
+  resource_group_name = "${var.env_name}"
+  location            = "${var.location}"
+  account_type        = "Premium_LRS"
+}
+
+resource "azurerm_storage_container" "opsmgr_storage_container" {
+  name                  = "opsmgrimage"
+  depends_on            = ["azurerm_storage_account.opsmgr_storage_account"]
+  resource_group_name   = "${var.env_name}"
+  storage_account_name  = "${azurerm_storage_account.opsmgr_storage_account.name}"
+  container_access_type = "private"
+}
+
+
 resource "azurerm_storage_container" "bosh_storage_container" {
   name                  = "bosh"
   depends_on            = ["azurerm_storage_account.bosh_root_storage_account"]
