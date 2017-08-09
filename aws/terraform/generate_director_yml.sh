@@ -11,6 +11,7 @@ ERT_CIDR=$(terraform state show -state ${TSTATE_FILE} aws_subnet.PcfVpcPrivateSu
 ERT_SUBNET_ID=$(terraform state show -state ${TSTATE_FILE} aws_subnet.PcfVpcPrivateSubnet_az1 | grep id | head -n 1 | awk '{print $3}')
 
 WEB_LOAD_BALANCER=$(terraform state show -state ${TSTATE_FILE} aws_elb.cfrouter | grep name | tail -n 1 | awk '{print $3}')
+PROXY_SERVER_IP=$(terraform state show -state ${TSTATE_FILE} aws_elb.cfrouter | grep public_ip | tail -n 1 | awk '{print $3}')
 
 function indexCidr() {
   INDEX=$(echo ${1} | sed "s/\(.*\)\.\(.*\)\.\(.*\)\..*/\1.\2.\3.${2}/g")
@@ -39,3 +40,4 @@ echo "secret_access_key": ${TF_VAR_aws_secret_key} >> ${DIRECTOR_CONFIG}
 echo "default_key_name": ${TF_VAR_aws_key_name} >> ${DIRECTOR_CONFIG}
 echo "web_load_balancer": ${WEB_LOAD_BALANCER} >> ${DIRECTOR_CONFIG}
 echo "private_key": "${DIR}/$(basename $PRIVATE_KEY_PATH)" >> ${DIRECTOR_CONFIG}
+echo "proxy_server_ip": ${PROXY_SERVER_IP} >> ${DIRECTOR_CONFIG}

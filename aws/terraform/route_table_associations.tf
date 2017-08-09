@@ -4,14 +4,6 @@ resource "aws_route_table_association" "a_az1" {
     route_table_id = "${aws_route_table.PublicSubnetRouteTable.id}"
 }
 
-
-# subnet associations for private subnet
-
-resource "aws_route_table_association" "b_az1" {
-    subnet_id = "${aws_subnet.PcfVpcPrivateSubnet_az1.id}"
-    route_table_id = "${aws_route_table.PrivateSubnetRouteTable_az1.id}"
-}
-
 # subnet associations for infrastructure subnet
 
 resource "aws_route_table_association" "i_az1" {

@@ -18,12 +18,6 @@ bosh-cli -n -e https://${director}:25555 alias-env ${director_name} \
 
 stemcell_url=$(bosh-cli int stemcell_metadata.yml --path /${iaas})
 
-bosh-cli -e ${director_name} upload-release https://bosh.io/d/github.com/cloudfoundry/diego-release?v=1.8.0
-bosh-cli -e ${director_name} upload-release https://bosh.io/d/github.com/cloudfoundry/cf-release?v=260
 bosh-cli -e ${director_name} upload-release https://bosh.io/d/github.com/cloudfoundry/garden-runc-release?v=1.2.0
-bosh-cli -e ${director_name} upload-release https://bosh.io/d/github.com/cloudfoundry/cflinuxfs2-rootfs-release?v=1.60.0
-bosh-cli -e ${director_name} upload-release https://bosh.io/d/github.com/cloudfoundry-incubator/consul-release?v=159
-bosh-cli -e ${director_name} upload-release https://bosh.io/d/github.com/cloudfoundry/capi-release?v=1.28.0
-bosh-cli -e ${director_name} upload-release https://bosh.io/d/github.com/cloudfoundry/loggregator?v=73
-bosh-cli -e ${director_name} upload-release https://bosh.io/d/github.com/cloudfoundry/uaa-release?v=32
+bosh-cli -e ${director_name} upload-release https://bosh.io/d/github.com/concourse/concourse?v=3.3.4
 bosh-cli -e ${director_name} upload-stemcell ${stemcell_url}
