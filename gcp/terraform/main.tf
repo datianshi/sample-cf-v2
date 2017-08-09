@@ -39,8 +39,14 @@ resource "google_compute_firewall" "bosh-bastion" {
     ports    = ["22"]
   }
 
+  allow {
+    protocol = "tcp"
+    ports    = ["443"]
+  }
+
   target_tags = ["bosh-bastion"]
 }
+
 
 // Allow all traffic within subnet
 resource "google_compute_firewall" "intra-subnet-open" {
@@ -181,4 +187,25 @@ resource "google_compute_instance" "nat-instance-private-with-nat-primary" {
 sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 EOT
+}
+
+
+// NAT server (primary)
+resource "google_compute_instance" "opsmgr" {
+  name         = "${var.prefix}opsmgr"
+  machine_type = "n1-standard-2"
+  zone         = "${var.zone}"
+
+  tags = ["bosh-bastion", "internal"]
+
+  disk {
+    image = "opsman"
+  }
+
+  network_interface {
+    subnetwork = "${google_compute_subnetwork.bosh-subnet-1.name}"
+    access_config {
+      // Ephemeral IP
+    }
+  }
 }

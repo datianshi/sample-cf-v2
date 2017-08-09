@@ -19,7 +19,7 @@ vm_types:
   cloud_properties:
     cpu: 2
     ram: 4096
-    disk: 30_240 
+    disk: 30_240
 
 disk_types:
 - name: medium
@@ -36,9 +36,7 @@ networks:
     azs: [z1]
     dns: [((dns_server))]
     reserved: []
-    static:
-    - ((postgres_sql_ip))
-    - ((ha_proxy_ip))
+    static: []
     cloud_properties:
       name: ((ert_network_name))
 
