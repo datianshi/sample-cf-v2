@@ -71,8 +71,8 @@ instance_groups:
   - name: groundcrew
     release: concourse
     properties:
-      http_proxy_url: http://((proxy_server_ip)):8080
-      https_proxy_url: http://((proxy_server_ip)):8080
+      http_proxy_url: http://((proxy_server_ip)):3128
+      https_proxy_url: http://((proxy_server_ip)):3128
       no_proxy:
       - 127.0.0.1
       - localhost

@@ -11,7 +11,7 @@ ERT_CIDR=$(terraform state show -state ${TSTATE_FILE} aws_subnet.PcfVpcPrivateSu
 ERT_SUBNET_ID=$(terraform state show -state ${TSTATE_FILE} aws_subnet.PcfVpcPrivateSubnet_az1 | grep id | head -n 1 | awk '{print $3}')
 
 WEB_LOAD_BALANCER=$(terraform state show -state ${TSTATE_FILE} aws_elb.cfrouter | grep name | tail -n 1 | awk '{print $3}')
-PROXY_SERVER_IP=$(terraform state show -state ${TSTATE_FILE} aws_elb.cfrouter | grep public_ip | tail -n 1 | awk '{print $3}')
+PROXY_SERVER_IP=$(terraform state show -state ${TSTATE_FILE} aws_instance.jumpbox | grep private_ip | awk '{print $3}')
 
 function indexCidr() {
   INDEX=$(echo ${1} | sed "s/\(.*\)\.\(.*\)\.\(.*\)\..*/\1.\2.\3.${2}/g")
