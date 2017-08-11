@@ -53,3 +53,20 @@ resource "aws_instance" "nat_az1" {
         Name = "${var.environment}-Nat Instance az1"
     }
 }
+
+
+
+resource "aws_vpc" "vpc2" {
+    cidr_block = "${var.vpc2_cidr}"
+    enable_dns_hostnames = true
+    tags {
+        Name = "vpc2"
+    }
+}
+
+resource "aws_internet_gateway" "internetGw2" {
+    vpc_id = "${aws_vpc.vpc2.id}"
+    tags {
+        Name = "vpc2-internet-gateway"
+    }
+}

@@ -60,6 +60,12 @@ resource "aws_security_group" "jumpbox" {
         protocol = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
     }
+    ingress {
+        from_port = 0
+        to_port = 0
+        protocol = "-1"
+        cidr_blocks = ["${aws_subnet.PcfVpcPublicSubnet_az1.cidr_block}", "${aws_subnet.PcfVpcPrivateSubnet_az1.cidr_block}", "${aws_subnet.public_subnet_vpc2.cidr_block}"]
+    }
     egress {
         from_port = 0
         to_port = 0
@@ -103,13 +109,34 @@ resource "aws_security_group" "directorSG" {
         from_port = 0
         to_port = 0
         protocol = "-1"
-        cidr_blocks = ["${aws_subnet.PcfVpcPublicSubnet_az1.cidr_block}"]
+        cidr_blocks = ["${aws_subnet.PcfVpcPublicSubnet_az1.cidr_block}", "${aws_subnet.PcfVpcPrivateSubnet_az1.cidr_block}", "${aws_subnet.public_subnet_vpc2.cidr_block}"]
+    }
+    egress {
+        from_port = 0
+        to_port = 0
+        protocol = -1
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+}
+
+resource "aws_security_group" "VPC2SG" {
+    name = "${var.environment}-pcf_director_sg"
+    description = "VPC2SG"
+    vpc_id = "${aws_vpc.vpc2.id}"
+    tags {
+        Name = "${var.environment}-Bosh Director VPC2 SG"
+    }
+    ingress {
+        from_port = 22
+        to_port = 22
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
     }
     ingress {
         from_port = 0
         to_port = 0
         protocol = "-1"
-        cidr_blocks = ["${aws_subnet.PcfVpcPrivateSubnet_az1.cidr_block}"]
+        cidr_blocks = ["${aws_vpc.PcfVpc.cidr_block}"]
     }
     egress {
         from_port = 0

@@ -39,3 +39,14 @@ resource "aws_subnet" "PcfVpcInfraSubnet_az1" {
         Name = "${var.environment}-PcfVpc Infrastructure Subnet"
     }
 }
+
+resource "aws_subnet" "public_subnet_vpc2" {
+    vpc_id = "${aws_vpc.vpc2.id}"
+
+    cidr_block = "${var.public_subnet_cidr_vpc2}"
+    availability_zone = "${var.az1}"
+
+    tags {
+        Name = "vpc2 subnet"
+    }
+}

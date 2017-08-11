@@ -7,6 +7,9 @@ variable "aws_region" {}
 variable "aws_cert_arn" {}
 variable "az1" {}
 variable "jumpbox_ami" {}
+variable "opsman_ami" {}
+variable "opsman_instance_type" {}
+variable "aws_account_id" {}
 
 variable "jumpbox_instance_type" {
     description = "Instance Type for Jumpbox"
@@ -35,6 +38,11 @@ variable private_subnet_cidr_az1 {
     default = "10.0.1.0/24"
 }
 
+variable "public_subnet_cidr_vpc2" {
+    description = "CIDR for the Public Subnet at vpc2"
+    default = "192.168.0.0/24"
+}
+
 variable "nat_ip_az1" {
     default = "10.0.0.6"
 }
@@ -42,4 +50,9 @@ variable "nat_ip_az1" {
 variable "infra_subnet_cidr_az1" {
     description = "CIDR for the infrastructure"
     default = "10.0.6.0/24"
+}
+
+variable "vpc2_cidr" {
+    description = "CIDR for the vpc2"
+    default = "192.168.0.0/16"
 }

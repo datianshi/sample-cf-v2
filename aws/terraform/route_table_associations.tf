@@ -18,3 +18,8 @@ resource "aws_route_table_association" "i_az1" {
     subnet_id = "${aws_subnet.PcfVpcInfraSubnet_az1.id}"
     route_table_id = "${aws_route_table.PrivateSubnetRouteTable_az1.id}"
 }
+
+resource "aws_route_table_association" "vpc2_az1" {
+    subnet_id = "${aws_subnet.public_subnet_vpc2.id}"
+    route_table_id = "${aws_route_table.PublicVPC2SubnetRouteTable.id}"
+}
