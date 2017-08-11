@@ -2,3 +2,8 @@
   path: /instance_groups/name=router/vm_extensions?
   value:
   - web_load_balancer
+
+- type: replace
+  path: /instance_groups/name=router2/vm_extensions?
+  value:
+  - web_load_balancer2

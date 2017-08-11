@@ -4,6 +4,6 @@
   - 10.0.1.1 - 10.0.1.10
 
 - type: replace
-  path: /networks/name=default/subnets/range=((vpc2_cidr))/reserved
+  path: /networks/name=vpc2/subnets/range=((vpc2_cidr))/reserved
   value:
   - 192.168.0.1 - 192.168.0.10

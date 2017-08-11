@@ -5,11 +5,7 @@
     cloud_properties:
       elbs:
       - ((web_load_balancer))
-
-- type: replace
-  path: /vm_extensions?
-  value:
   - name: web_load_balancer2
     cloud_properties:
       elbs:
-      - ((web_load_balancer2))
+      - ((web_load_balancer))

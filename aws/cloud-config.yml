@@ -48,6 +48,7 @@ networks:
     static:
     cloud_properties:
       subnet: ((vpc2_subnet_id))
+      security_groups: ((vpc2_security_group))
 - name: vip
   type: vip
 

@@ -7,6 +7,7 @@ TSTATE_FILE="${DIR}/terraform.tfstate"
 BOSH_CIDR=$(terraform state show -state ${TSTATE_FILE} aws_subnet.PcfVpcInfraSubnet_az1 | grep cidr_block | awk '{print $3}')
 BOSH_SUBNET_ID=$(terraform state show -state ${TSTATE_FILE} aws_subnet.PcfVpcInfraSubnet_az1 | grep id | head -n 1 | awk '{print $3}')
 SECURITY_GROUP=$(terraform state show -state ${TSTATE_FILE} aws_security_group.directorSG | grep id | head -n 1 | awk '{print $3}')
+VPC2_SECURITY_GROUP=$(terraform state show -state ${TSTATE_FILE} aws_security_group.VPC2SG | grep id | head -n 1 | awk '{print $3}')
 ERT_CIDR=$(terraform state show -state ${TSTATE_FILE} aws_subnet.PcfVpcPrivateSubnet_az1 | grep cidr_block | awk '{print $3}')
 ERT_SUBNET_ID=$(terraform state show -state ${TSTATE_FILE} aws_subnet.PcfVpcPrivateSubnet_az1 | grep id | head -n 1 | awk '{print $3}')
 WEB_LOAD_BALANCER=$(terraform state show -state ${TSTATE_FILE} aws_elb.cfrouter | grep name | tail -n 1 | awk '{print $3}')
@@ -33,6 +34,7 @@ echo "internal_gw: ${internal_gw}" >> ${DIRECTOR_CONFIG}
 echo "internal_ip: ${internal_ip}" >> ${DIRECTOR_CONFIG}
 echo "subnet_id: ${BOSH_SUBNET_ID}" >> ${DIRECTOR_CONFIG}
 echo "default_security_groups: [${SECURITY_GROUP}]" >> ${DIRECTOR_CONFIG}
+echo "vpc2_security_group: [${VPC2_SECURITY_GROUP}]" >> ${DIRECTOR_CONFIG}
 echo "ert_internal_cidr: ${ERT_CIDR}" >>${DIRECTOR_CONFIG}
 echo "ert_internal_gw: ${ert_internal_gw}" >>${DIRECTOR_CONFIG}
 echo "ert_subnet_id: ${ERT_SUBNET_ID}" >> ${DIRECTOR_CONFIG}
