@@ -181,7 +181,7 @@ resource "aws_security_group" "VPC2SG" {
         from_port = 0
         to_port = 0
         protocol = "-1"
-        cidr_blocks = ["${aws_vpc.PcfVpc.cidr_block}"]
+        cidr_blocks = ["${aws_vpc.PcfVpc.cidr_block}","${aws_subnet.public_subnet_vpc2.cidr_block}"]
     }
     egress {
         from_port = 0
