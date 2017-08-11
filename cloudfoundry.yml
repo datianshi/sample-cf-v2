@@ -300,7 +300,12 @@ instance_groups:
   vm_type: medium
   stemcell: default
   jobs:
-  - {name: haproxy, release: cf}
+  - name: haproxy
+    release: cf
+    consumes:
+      router:
+        from: majorrouter
+
   - name: consul_agent
     release: consul
     consumes:
