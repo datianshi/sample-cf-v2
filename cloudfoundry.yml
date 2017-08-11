@@ -178,6 +178,8 @@ instance_groups:
     diego:
       rep:
         zone: z1
+      placement_tags:
+      - vpc_peering
 
 - name: diego_brain
   azs: [z1]
