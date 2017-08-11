@@ -44,6 +44,45 @@ resource "aws_security_group" "cfrouter" {
     }
 }
 
+resource "aws_security_group" "cfrouter2" {
+    name = "${var.environment}-cfrouter2"
+    description = "Allow incoming connections for cfrouter."
+    vpc_id = "${aws_vpc.vpc2.id}"
+    tags {
+        Name = "${var.environment}-cfrouter2"
+    }
+    ingress {
+        from_port = 22
+        to_port = 22
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+    ingress {
+        from_port = 80
+        to_port = 80
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+    ingress {
+        from_port = 443
+        to_port = 443
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+    ingress {
+        from_port = 4443
+        to_port = 4443
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+    egress {
+        from_port = 0
+        to_port = 0
+        protocol = -1
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+}
+
 /*
   Jumpbox Security group
 */

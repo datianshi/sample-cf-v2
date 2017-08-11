@@ -148,6 +148,37 @@ instance_groups:
       rep:
         zone: z1
 
+- name: diego_cell2
+  azs: [z1]
+  instances: 1
+  vm_type: large
+  stemcell: default
+  networks:
+  - name: vpc2
+  jobs:
+  - name: consul_agent
+    release: consul
+    consumes:
+      consul:
+        from: consul_server
+  - name: rep
+    release: diego
+  - name: garden
+    release: garden-runc
+  - name: cflinuxfs2-rootfs-setup
+    release: cflinuxfs2-rootfs
+  - name: metron_agent
+    release: loggregator
+  update:
+    serial: true
+    max_in_flight: 1
+  properties:
+    metron_agent:
+      zone: z1
+    diego:
+      rep:
+        zone: z1
+
 - name: diego_brain
   azs: [z1]
   instances: 1
@@ -422,6 +453,25 @@ instance_groups:
         from: consul_server
   networks:
   - name: ((default_network))
+  properties:
+    dropsonde: {enabled: true}
+
+- name: router2
+  azs: [z1]
+  instances: 1
+  vm_type: medium
+  stemcell: default
+  persistent_disk_type: large
+  jobs:
+  - {name: gorouter, release: cf}
+  - {name: metron_agent, release: loggregator}
+  - name: consul_agent
+    release: consul
+    consumes:
+      consul:
+        from: consul_server
+  networks:
+  - name: vpc2
   properties:
     dropsonde: {enabled: true}
 

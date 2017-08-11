@@ -37,6 +37,17 @@ networks:
     - ((ha_proxy_ip))
     cloud_properties:
       subnet: ((ert_subnet_id))
+- name: vpc2
+  type: manual
+  subnets:
+  - range: ((vpc2_cidr))
+    gateway: ((vpc2_internal_gw))
+    azs: [z1]
+    dns: [8.8.8.8]
+    reserved: []
+    static:
+    cloud_properties:
+      subnet: ((vpc2_subnet_id))
 - name: vip
   type: vip
 
