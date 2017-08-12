@@ -149,7 +149,7 @@ instance_groups:
         zone: z1
 
 - name: diego_cell2
-  azs: [z1]
+  azs: [z2]
   instances: 1
   vm_type: large
   stemcell: default
@@ -471,7 +471,7 @@ instance_groups:
     dropsonde: {enabled: true}
 
 - name: router2
-  azs: [z1]
+  azs: [z2]
   instances: 1
   vm_type: medium
   stemcell: default
