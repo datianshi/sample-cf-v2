@@ -3,7 +3,7 @@ azs:
   cpi: aws1
   cloud_properties:
     availability_zone: ((az))
-- name: z1
+- name: z2
   cpi: aws2
   cloud_properties:
     availability_zone: ((az))
@@ -48,7 +48,7 @@ networks:
   subnets:
   - range: ((vpc2_cidr))
     gateway: ((vpc2_internal_gw))
-    azs: [z1]
+    azs: [z2]
     dns: [8.8.8.8]
     reserved: []
     static:
