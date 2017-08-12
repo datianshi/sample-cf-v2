@@ -17,5 +17,5 @@ bosh-cli -n -e https://${director}:25555 alias-env ${director_name} \
 
 
 bosh-cli -n -e ${director_name} update-cpi-config ${iaas}/cpi-config.yml \
-  -o ${iaas}/cloud_config_ops.yml \
+  --vars-file ${iaas}/director.ym \
   --ca-cert <(bosh-cli int ${iaas}/creds.yml --path /default_ca/ca)
