@@ -4,7 +4,7 @@ azs:
   cloud_properties:
     availability_zone: ((az))
 - name: z1
-cpi: aws2
+  cpi: aws2
   cloud_properties:
     availability_zone: ((az))
 
