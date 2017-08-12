@@ -1,0 +1,17 @@
+cpis:
+- name: aws1
+  type: aws
+  properties:
+    access_key_id: ((access_key_id))
+    secret_access_key: ((secret_access_key))
+    default_key_name: ((default_key_name))
+    default_security_groups: ((default_security_groups))
+    region: ((region))
+- name: aws2
+  type: aws
+  properties:
+    access_key_id: ((access_key_id))
+    secret_access_key: ((secret_access_key))
+    default_key_name: ((default_key_name))
+    default_security_groups: ((vpc2_security_group))
+    region: ((region))

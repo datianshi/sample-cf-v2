@@ -56,3 +56,8 @@ variable "vpc2_cidr" {
     description = "CIDR for the vpc2"
     default = "192.168.0.0/16"
 }
+
+variable "route53_zone_id" {
+    description = "route 53 zone"
+    default = "Z28RYDWSA0ALH7"
+}

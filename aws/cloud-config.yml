@@ -1,7 +1,13 @@
 azs:
 - name: z1
+  cpi: aws1
   cloud_properties:
     availability_zone: ((az))
+- name: z1
+cpi: aws2
+  cloud_properties:
+    availability_zone: ((az))
+
 
 vm_types:
 - name: small
@@ -48,7 +54,6 @@ networks:
     static:
     cloud_properties:
       subnet: ((vpc2_subnet_id))
-      security_groups: ((vpc2_security_group))
 - name: vip
   type: vip
 
