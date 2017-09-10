@@ -1,5 +1,4 @@
-postgres_sql_ip: 10.193.53.132
-ha_proxy_ip: 10.193.53.131
+ha_proxy_ip: 10.193.63.151
 default_network: default
 dns_server: 10.193.63.2
 system_domain: test.shaozhenpcf.com

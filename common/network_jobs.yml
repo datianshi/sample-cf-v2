@@ -4,10 +4,3 @@
     - name: ((default_network))
       static_ips:
       - ((ha_proxy_ip))
-
-- type: replace
-  path: /instance_groups/name=postgres/networks
-  value:
-    - name: ((default_network))
-      static_ips:
-      - ((postgres_sql_ip))

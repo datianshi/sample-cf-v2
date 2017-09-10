@@ -13,6 +13,8 @@ then
 fi
 
 command="$cmd bosh-deployment/bosh.yml \
+  -o bosh-deployment/uaa.yml \
+  -o bosh-deployment/config-server.yml \
   -o bosh-deployment/${iaas}/cpi.yml \
   --vars-store ${iaas}/creds.yml \
   --vars-file ${iaas}/director.yml"

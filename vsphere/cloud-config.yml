@@ -20,6 +20,11 @@ vm_types:
     cpu: 2
     ram: 4096
     disk: 30_240
+- name: compilation
+  cloud_properties:
+    cpu: 4
+    ram: 4096
+    disk: 30_240
 
 disk_types:
 - name: medium
@@ -36,7 +41,8 @@ networks:
     azs: [z1]
     dns: [((dns_server))]
     reserved: []
-    static: []
+    static:
+    - ((ha_proxy_ip))
     cloud_properties:
       name: ((ert_network_name))
 
@@ -44,5 +50,5 @@ compilation:
   workers: 5
   reuse_compilation_vms: true
   az: z1
-  vm_type: large
+  vm_type: compilation
   network: default
