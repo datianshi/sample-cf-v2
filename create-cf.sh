@@ -27,6 +27,7 @@ fi
 bosh-cli int cloudfoundry.yml --vars-store creds.yml \
             -o common/network_jobs.yml \
             -o ${iaas}/cf_ops.yml \
+            -o ./cf_networking.yml \
             -v director_uuid=${DIRECTOR_UUID} \
             --vars-file config.yml > cf.yml
 

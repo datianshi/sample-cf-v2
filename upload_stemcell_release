@@ -23,7 +23,7 @@ bosh-cli -e ${director_name} upload-release https://bosh.io/d/github.com/cloudfo
 bosh-cli -e ${director_name} upload-release https://bosh.io/d/github.com/cloudfoundry/garden-runc-release?v=1.2.0
 bosh-cli -e ${director_name} upload-release https://bosh.io/d/github.com/cloudfoundry/cflinuxfs2-rootfs-release?v=1.60.0
 bosh-cli -e ${director_name} upload-release https://bosh.io/d/github.com/cloudfoundry-incubator/consul-release?v=159
-bosh-cli -e ${director_name} upload-release https://bosh.io/d/github.com/cloudfoundry/capi-release?v=1.28.0
+bosh-cli -e ${director_name} upload-release https://bosh.io/d/github.com/cloudfoundry/capi-release?v=1.38.0
 bosh-cli -e ${director_name} upload-release https://bosh.io/d/github.com/cloudfoundry/loggregator?v=89
 bosh-cli -e ${director_name} upload-release https://bosh.io/d/github.com/cloudfoundry/uaa-release?v=32
 bosh-cli -e ${director_name} upload-release https://bosh.io/d/github.com/cloudfoundry-incubator/cf-networking-release?v=1.6.0

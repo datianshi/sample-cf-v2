@@ -28,18 +28,18 @@
     authorized-grant-types: client_credentials
     secret: ((uaa_clients_network_policy_secret))
 - type: replace
-  path: /instance_groups/name=diego-cell/jobs/name=garden/properties/garden/network_plugin?
+  path: /instance_groups/name=diego_cell/jobs/name=garden/properties/garden/network_plugin?
   value: /var/vcap/packages/runc-cni/bin/garden-external-networker
 - type: replace
-  path: /instance_groups/name=diego-cell/jobs/name=garden/properties/garden/network_plugin_extra_args?/-
+  path: /instance_groups/name=diego_cell/jobs/name=garden/properties/garden/network_plugin_extra_args?/-
   value: --configFile=/var/vcap/jobs/garden-cni/config/adapter.json
 - type: replace
-  path: /instance_groups/name=diego-cell/jobs/-
+  path: /instance_groups/name=diego_cell/jobs/-
   value:
     name: garden-cni
     release: cf-networking
 - type: replace
-  path: /instance_groups/name=diego-cell/jobs/-
+  path: /instance_groups/name=diego_cell/jobs/-
   value:
     name: netmon
     release: cf-networking
@@ -68,21 +68,21 @@
 - type: replace
   path: /instance_groups/name=diego_cell/jobs/-
   value:
-    name: silk-cni
+    name: cni
     release: cf-networking
 - type: replace
   path: /instance_groups/name=diego_brain/jobs/-
   value:
     consumes:
       database:
-        from: db
+        from: proxy-mysql
     name: silk-controller
     properties:
       cf_networking:
         silk_controller:
           ca_cert: ((silk_controller.ca))
           database:
-            host: sql-db.service.cf.internal
+            host: mysql.service.cf.internal
             name: network_connectivity
             password: ((cf_mysql_mysql_seeded_databases_network_connectivity_password))
             port: 3306
@@ -104,14 +104,14 @@
   value:
     consumes:
       database:
-        from: db
+        from: proxy-mysql
     name: policy-server
     properties:
       cf_networking:
         policy_server:
           ca_cert: ((network_policy_server.ca))
           database:
-            host: sql-db.service.cf.internal
+            host: mysql.service.cf.internal
             name: network_policy
             password: ((cf_mysql_mysql_seeded_databases_network_policy_password))
             port: 3306
@@ -119,8 +119,23 @@
             username: network_policy
           server_cert: ((network_policy_server.certificate))
           server_key: ((network_policy_server.private_key))
-          uaa_ca: ((uaa_ssl.ca))
+          uaa_ca: ((default_ca.ca))
           uaa_client_secret: ((uaa_clients_network_policy_secret))
+    release: cf-networking
+
+- type: replace
+  path: /instance_groups/name=api/jobs/-
+  value:
+    consumes:
+      database:
+        from: proxy-mysql
+    name: policy-server-internal
+    properties:
+      cf_networking:
+        policy_server_internal:
+          ca_cert: ((network_policy_server.ca))
+          server_cert: ((network_policy_server.certificate))
+          server_key: ((network_policy_server.private_key))
     release: cf-networking
 - type: replace
   path: /instance_groups/name=api/jobs/name=route_registrar/properties/route_registrar/routes/-
@@ -131,7 +146,7 @@
     uris:
     - api.((system_domain))/networking
 - type: replace
-  path: /instance_groups/name=api/jobs/name=consul_agent/properties/consul/agent/services/policy-server?
+  path: /instance_groups/name=api/jobs/name=consul_agent/properties/consul/agent/services/policy-server-internal?
   value:
     name: policy-server
 - type: replace
