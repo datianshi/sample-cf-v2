@@ -32,9 +32,7 @@ networks:
     azs: [z1]
     dns: [8.8.8.8]
     reserved: []
-    static:
-    - ((postgres_sql_ip))
-    - ((ha_proxy_ip))
+    static: ((static_ips))
     cloud_properties:
       subnet: ((ert_subnet_id))
 - name: vip
