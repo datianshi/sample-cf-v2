@@ -1,0 +1,53 @@
+name: haproxy
+
+releases:
+- name: haproxy
+  version: latest
+
+stemcells:
+- alias: trusty
+  os: ubuntu-trusty
+  version: latest
+
+instance_groups:
+- name: ha_proxy
+  instances: 1
+  vm_type: medium
+  stemcell: trusty
+  azs: [z1]
+  networks:
+  - name: default
+  jobs:
+  - name: haproxy
+    release: haproxy
+    consumes: {}
+    provides: {}
+    properties:
+      ha_proxy:
+        backend_ca_file: "-----BEGIN CERTIFICATE-----\r\nMIIDDjCCAfagAwIBAgIUGop7sZOOI+IJwChNxt7x5knPf7MwDQYJKoZIhvcNAQEL\r\nBQAwHzELMAkGA1UEBhMCVVMxEDAOBgNVBAoMB1Bpdm90YWwwHhcNMTcwODAxMDUw\r\nNDEwWhcNMjEwODAyMDUwNDEwWjAfMQswCQYDVQQGEwJVUzEQMA4GA1UECgwHUGl2\r\nb3RhbDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKHt0szaN0mNB7/m\r\nPwyapFRq2CVJUwN9bOd6tXKjAdII+LCCvB3NZgNVWbMCccqU/e+FQ9/gx4+TmRHL\r\nD4YWRIw+OvC/C4QsTYC0/3Qk4NydYE4WkvpXXZoceVL/Nvmvp6YVnv3NA+p4CdA7\r\nPpNwE8eyYlkP9vbtzBXIvgDeere1VA+wqyyOJpbMvieT/6zBal4oE7fXq9cXiJbT\r\nuiOYT6tmx/cx5QfO8BkpQpVlGQ0Na1CSxY7Ks8LPFLwBEvbfiXDR3Eiwk8Cj4hRS\r\nSE1N40KyWPEGX05HilKcCf0JAajBBrQh/Z29qxOAn2VkT4qdYE6w6NYS6XsRAYnj\r\n5imeX4cCAwEAAaNCMEAwHQYDVR0OBBYEFH63F8InOIvDxhxybnaf7v6m3Xx1MA8G\r\nA1UdEwEB/wQFMAMBAf8wDgYDVR0PAQH/BAQDAgEGMA0GCSqGSIb3DQEBCwUAA4IB\r\nAQCZfhITRC7mN5jOgnfX4MA6UuktK7Xo43XT8akBmkwdSi0Xl7eQeH0cqwIQ5RFG\r\nO7YIhODKDJBaKy0F5ayO4RxrqpjYit0yXn1BjAOxGB8ciMdee9rQGthqz95HV1xb\r\nvzR92JE3qEcLzsmuxbx9Z2TPABU/qMLTz+oiRwGMciBtXnWe798xRX+QvJPHlg7w\r\ngv4wm7ViWnYBLgAEmPzOoePq73JlUALJ52OIOdAWgdx7pRTFy+9NVk8D8c7ciNf8\r\n/OmwOoxTQpNUvU+DYLtCKpbOsbborZKwJoCy7TMmJPu0kdan2BfaLdpAtT0N1nes\r\n2DHNnc0U+xQwW3t6kobIYxfx\r\n-----END
+          CERTIFICATE-----"
+        backend_port: 443
+        backend_ssl: verify
+        buffer_size_bytes: 16384
+        client_timeout: 900
+        disable_http: false
+        disable_tls_10: true
+        disable_tls_11: true
+        enable_health_check_http: true
+        internal_only_domains: []
+        server_timeout: 900
+        ssl_ciphers: DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384
+        ssl_pem: "-----BEGIN CERTIFICATE-----\r\nMIIEEjCCAvqgAwIBAgIVAN2H8zHYjVROeDaeG/7bg+nMFIWIMA0GCSqGSIb3DQEB\r\nCwUAMB8xCzAJBgNVBAYTAlVTMRAwDgYDVQQKDAdQaXZvdGFsMB4XDTE3MDkxMzIz\r\nMDI0OVoXDTE5MDkxMzIzMDI0OVowQjELMAkGA1UEBhMCVVMxEDAOBgNVBAoMB1Bp\r\ndm90YWwxITAfBgNVBAMMGCoubXV0dWFsLnNoYW96aGVucGNmLmNvbTCCASIwDQYJ\r\nKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMmxtJlJeBWMncfdxzsjQ6UzYPlK+az8\r\npt61L4i5ads9l+Bli50dhl90F6Ik31iN/frRxBgERYUxMtDosfwAvRoToxXqvpAM\r\nlY78Eop2JrOzCo5swwOq7j1bau+xngLAqOFNUIbvl1/1QEP865fQXzEXOzvYkTcy\r\n5OAWfO3j/OxItEDQ3erK8jqAIX40JhyDeKadBu4V51uMShLc83rQC8xnWYppeOyj\r\nevT1SbB5OxxggwiOgheXkv9WOgzOwqBGW8+uRlGA1cZ/9zHzm72/m4UzQWs2+cLv\r\ncCRUq37awKjfWYO30p2ECMKijhFzszCD4OSM+c75ML9qdqighBeZrBcCAwEAAaOC\r\nASAwggEcMA4GA1UdDwEB/wQEAwIHgDAdBgNVHQ4EFgQUdbXb9WqrbSgqVfQMwZhm\r\nOnXbKMcwHQYDVR0lBBYwFAYIKwYBBQUHAwIGCCsGAQUFBwMBMB8GA1UdIwQYMBaA\r\nFH63F8InOIvDxhxybnaf7v6m3Xx1MIGqBgNVHREEgaIwgZ+CGCoubXV0dWFsLnNo\r\nYW96aGVucGNmLmNvbYIcKi5ydW4uaGFhcy02MC5wZXoucGl2b3RhbC5pb4IfKi5j\r\nZmFwcHMuaGFhcy02MC5wZXoucGl2b3RhbC5pb4IiKi5sb2dpbi5ydW4uaGFhcy02\r\nMC5wZXoucGl2b3RhbC5pb4IgKi51YWEucnVuLmhhYXMtNjAucGV6LnBpdm90YWwu\r\naW8wDQYJKoZIhvcNAQELBQADggEBAKHN3fSKmNWiisym3VEs1fnYDeeJGOyoe0Bh\r\n8386Rex8HE2YAWrAbROJyTBMseSeWwsWVx/0VFkLHdKi78JyujXHeOw8wYoVquZl\r\nURizKVJkrjPwV9dS+j05rDHfhizOVUs5dbZ68hyHuznVd3O53rDAJlCWbnppeO3Y\r\nG9qVk4Yxw8Rl64EG0cDbLT5+3Y2vjNEKJ+OAxSFyX6ZuDnHnqFGGorkve9tUXyA8\r\n6yZoYoBH6i+qRM7Hx3w2CakyG70frU3SNp6XclM7jtV5m1Im4/ugKnCOY6+VsJXG\r\nFTH4YbFUR1srOn2SYrP3pG8puVA5z61xkPoTGmLCu+H4uR3SSgU=\r\n-----END
+          CERTIFICATE-----\r\n\n-----BEGIN RSA PRIVATE KEY-----\r\nMIIEowIBAAKCAQEAybG0mUl4FYydx93HOyNDpTNg+Ur5rPym3rUviLlp2z2X4GWL\r\nnR2GX3QXoiTfWI39+tHEGARFhTEy0Oix/AC9GhOjFeq+kAyVjvwSinYms7MKjmzD\r\nA6ruPVtq77GeAsCo4U1Qhu+XX/VAQ/zrl9BfMRc7O9iRNzLk4BZ87eP87Ei0QNDd\r\n6sryOoAhfjQmHIN4pp0G7hXnW4xKEtzzetALzGdZiml47KN69PVJsHk7HGCDCI6C\r\nF5eS/1Y6DM7CoEZbz65GUYDVxn/3MfObvb+bhTNBazb5wu9wJFSrftrAqN9Zg7fS\r\nnYQIwqKOEXOzMIPg5Iz5zvkwv2p2qKCEF5msFwIDAQABAoIBAClGuNL1+iFO2ath\r\nc7hiiyFv1lSuR1JjkjLZmZS9fTBk9oPxxBSvSiSWuY9xRFP3GxcNfrf7h86uNtwS\r\nAvqzm/+OLT37AGyyZpkQdSro6xqzdWGYWICTppXf846CJvghPW5+SBCVT8FPi4te\r\nY0h6WEDPpEunEnDddYF2mLKGiehAy3yuPY/SU6ycWxdlEDnkO2Dqt6XV+musvBJh\r\nek7Zp5bsdTM+6osFnMNlVXjNcvYCzK6r68vB8aIOzchaUiOqu0ZeV/0OFnM5uyhT\r\nicz0GmuLoX6pBKgAj3IH7C4q3KoQiC2STmEwG+zeS8Oq8vOxSxMRWfbLRDggzrta\r\nlPthxSECgYEA9SW+QOiP5mND2AJuCoPEa71loTda8MFGdIZapQIdY6ckmtyWCr8G\r\nb81cp+S+316p1R7tIOz8TsMRtismVVV3xFy8eMa/PG+A9Wmq0TgXKo1MOCUDFKwW\r\nouA0aySWbxi0r0xUIsnocwtlAoaa/d756k1pwQfmRdrvQmXB1nblsPsCgYEA0p+B\r\nlS6D+D08502AyibS9BNSQvbVOP7D0NUC8T4P6M11NaMifo5r9HWpaY/QbYpzDwBL\r\ncHFF4Zd/OyLvTt3+Bl0nbn+R0ElTevx0ulOc2R2oBytHmynVrpm50w54Vb6kBJL2\r\nIEyTAy6vXsOZScSXzljnkrbwzuI/XiyM+lJQ3pUCgYA0Cvw12WlbNq2beQCVeN3F\r\nJaMis5a5z74+VJt/tlA47K3ntnaf92fNamKGPhiLYRRa60LaH5V8vwrOiqCLsyZG\r\n6I0WctL8aIuPDgy2d9rrLK4GqUzbIaF4mHJoYI8TLMKHCIRAEm8npT6fZ6YVyTVz\r\nGVYfJacsI0tx5BpfhkRC6wKBgQDCQVKmYIxeuzwcqKKLz1rouZk5IaZuNqorRQq9\r\nrNvHfxcHLTp3Nqvif1KMhZNaNEMCJudtAUvOUIeL5yCHwL60592iUA4P6FESMR0H\r\nbG5Q4MVEN2qHdQIbUrTML6BUlMt5XIGcMIO2f6xG3mfWXXcVXXHXItreNFT1amlr\r\nxdfIMQKBgD81ujtnrk6BYSzchnKdZc4itf3CGA6/DpDjg4oPUCJ6r72RRdSBsd5N\r\nYFELm0Rz/6DdEV423wJNlm5eniWlf4KqFcDDUvtNGWbyXtpRy0O1Qo2wNCsBsByA\r\nVKjaVS3CdB8GSQ9dQhA251h4SmEHOxu4hpPP8tylz6WGtCsP0uBI\r\n-----END
+          RSA PRIVATE KEY-----\r\n"
+        tcp_link_port: 2222
+        trusted_domain_cidrs:
+        backend_servers:
+        - 10.193.63.145
+        client_cert: true
+update:
+  canaries: 1
+  canary_watch_time: 1000-60000
+  max_in_flight: 1
+  serial: true
+  update_watch_time: 1000-60000
