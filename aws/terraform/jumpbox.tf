@@ -21,19 +21,18 @@ resource "aws_instance" "jumpbox" {
     }
 }
 
-resource "aws_instance" "jumpbox2" {
-    ami = "${var.jumpbox_ami}"
+resource "aws_instance" "OpsMan" {
+    ami = "ami-fceb1584"
     availability_zone = "${var.az1}"
     instance_type = "${var.jumpbox_instance_type}"
     key_name = "${var.aws_key_name}"
-    vpc_security_group_ids = ["${aws_security_group.jumpbox2.id}"]
-    subnet_id = "${aws_subnet.PcfVpcPrivateSubnet_az1.id}"
-    associate_public_ip_address = false
-    user_data = "${data.template_file.jumpbox_user_data.rendered}"
+    vpc_security_group_ids = ["${aws_security_group.cfrouter.id}"]
+    subnet_id = "${aws_subnet.PcfVpcPublicSubnet_az1.id}"
+    associate_public_ip_address = true
     root_block_device {
-        volume_size = 100
+        volume_size = 50
     }
     tags {
-        Name = "${var.environment}-Jumpbox2"
+        Name = "${var.environment}-Opsman"
     }
 }

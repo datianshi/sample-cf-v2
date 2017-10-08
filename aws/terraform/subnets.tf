@@ -39,3 +39,25 @@ resource "aws_subnet" "PcfVpcInfraSubnet_az1" {
         Name = "${var.environment}-PcfVpc Infrastructure Subnet"
     }
 }
+
+resource "aws_subnet" "PcfVpcRdsSubnet_az1" {
+    vpc_id = "${aws_vpc.PcfVpc.id}"
+
+    cidr_block = "${var.rds_subnet_cidr_az1}"
+    availability_zone = "${var.az1}"
+
+    tags {
+        Name = "${var.environment}-PcfVpc Rds Subnet AZ1"
+    }
+}
+
+resource "aws_subnet" "PcfVpcRdsSubnet_az2" {
+    vpc_id = "${aws_vpc.PcfVpc.id}"
+
+    cidr_block = "${var.rds_subnet_cidr_az2}"
+    availability_zone = "${var.az2}"
+
+    tags {
+        Name = "${var.environment}-PcfVpc Rds Subnet AZ2"
+    }
+}

@@ -6,6 +6,7 @@ variable "amis_nat" {}
 variable "aws_region" {}
 variable "aws_cert_arn" {}
 variable "az1" {}
+variable "az2" {}
 variable "jumpbox_ami" {}
 
 variable "jumpbox_instance_type" {
@@ -42,4 +43,19 @@ variable "nat_ip_az1" {
 variable "infra_subnet_cidr_az1" {
     description = "CIDR for the infrastructure"
     default = "10.0.6.0/24"
+}
+
+variable "rds_subnet_cidr_az1" {
+    description = "CIDR for the rds"
+    default = "10.0.7.0/24"
+}
+
+variable "rds_subnet_cidr_az2" {
+    description = "CIDR for the rds"
+    default = "10.0.8.0/24"
+}
+
+variable "db_instance_type" {
+    description = "Instance Type for RDS instance"
+    default = "db.m3.large"
 }
