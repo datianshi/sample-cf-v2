@@ -15,13 +15,13 @@ resource "google_compute_route" "nat-primary" {
   next_hop_instance = "${google_compute_instance.nat-instance-private-with-nat-primary.name}"
   next_hop_instance_zone = "${var.zone}"
   priority    = 800
-  tags = ["no-ip"]
+  tags = ["pcf-vms"]
 }
 
 // Subnet for the BOSH director
 resource "google_compute_subnetwork" "bosh-subnet-1" {
   name          = "${var.prefix}bosh-${var.region}"
-  ip_cidr_range = "${var.baseip}/24"
+  ip_cidr_range = "10.0.0.0/24"
   network       = "${google_compute_network.bosh.self_link}"
 }
 
@@ -67,19 +67,22 @@ resource "google_compute_firewall" "intra-subnet-open" {
     ports    = ["1-65535"]
   }
 
-  source_tags = ["internal"]
+  source_tags = ["internal","pcf-vms"]
 }
 
 // BOSH bastion host
 resource "google_compute_instance" "bosh-bastion" {
-  name         = "${var.prefix}bosh-bastion"
+  name         = "${var.prefix}bosh-bastion2"
   machine_type = "n1-standard-1"
   zone         = "${var.zone}"
 
   tags = ["bosh-bastion", "internal"]
 
-  disk {
-    image = "${var.latest_ubuntu}"
+  boot_disk {
+    initialize_params {
+      image = "${var.latest_ubuntu}"
+      size  = 50
+    }
   }
 
   network_interface {
@@ -169,8 +172,11 @@ resource "google_compute_instance" "nat-instance-private-with-nat-primary" {
 
   tags = ["nat", "internal"]
 
-  disk {
-    image = "${var.latest_ubuntu}"
+  boot_disk {
+    initialize_params {
+      image = "${var.latest_ubuntu}"
+      size  = 20
+    }
   }
 
   network_interface {
@@ -198,8 +204,11 @@ resource "google_compute_instance" "opsmgr" {
 
   tags = ["bosh-bastion", "internal"]
 
-  disk {
-    image = "opsman"
+  boot_disk {
+    initialize_params {
+      image = "opsman20"
+      size  = 50
+    }
   }
 
   network_interface {

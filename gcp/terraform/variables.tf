@@ -55,5 +55,5 @@ variable "cf_network" {
 
 variable "opsmgr_image" {
     type = "string"
-    default = "https://storage.googleapis.com/ops-manager-us/pcf-gcp-1.11.0.tar.gz"
+    default = "https://storage.googleapis.com/ops-manager-us/pcf-gcp-2.0-build.189.tar.gz"
 }

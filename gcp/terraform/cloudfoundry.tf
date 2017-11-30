@@ -2,7 +2,7 @@
 resource "google_compute_subnetwork" "cf-compilation-subnet-1" {
   name          = "${var.prefix}cf-compilation-${var.region_compilation}"
   region        = "${var.region_compilation}"
-  ip_cidr_range = "10.200.0.0/16"
+  ip_cidr_range = "10.0.1.0/24"
   network       = "${google_compute_network.bosh.self_link}"
 
 }
@@ -24,7 +24,7 @@ resource "google_compute_firewall" "cf-public" {
     ports    = ["80", "443", "2222", "4443", "8080"]
   }
 
-  target_tags = ["cf-public"]
+  target_tags = ["cf-public", "router"]
 }
 
 // Allow access to CloudFoundry TCP router
@@ -43,6 +43,11 @@ resource "google_compute_firewall" "cf-tcp-public" {
 // Static IP address for HTTP forwarding rule
 resource "google_compute_global_address" "cf" {
   name = "${var.prefix}cf"
+}
+
+// Static IP address for Doppler forwarding rule
+resource "google_compute_address" "doppler" {
+  name = "${var.prefix}doppler"
 }
 
 // Static IP address for TCP forwarding rule
