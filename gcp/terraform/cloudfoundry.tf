@@ -24,7 +24,7 @@ resource "google_compute_firewall" "cf-public" {
     ports    = ["80", "443", "2222", "4443", "8080"]
   }
 
-  target_tags = ["cf-public", "router"]
+  target_tags = ["cf-public", "router", "pcf-vms"]
 }
 
 // Allow access to CloudFoundry TCP router

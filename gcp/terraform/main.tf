@@ -197,24 +197,24 @@ EOT
 
 
 // NAT server (primary)
-resource "google_compute_instance" "opsmgr" {
-  name         = "${var.prefix}opsmgr"
-  machine_type = "n1-standard-2"
-  zone         = "${var.zone}"
-
-  tags = ["bosh-bastion", "internal"]
-
-  boot_disk {
-    initialize_params {
-      image = "opsman20"
-      size  = 50
-    }
-  }
-
-  network_interface {
-    subnetwork = "${google_compute_subnetwork.bosh-subnet-1.name}"
-    access_config {
-      // Ephemeral IP
-    }
-  }
-}
+# resource "google_compute_instance" "opsmgr" {
+#   name         = "${var.prefix}opsmgr"
+#   machine_type = "n1-standard-2"
+#   zone         = "${var.zone}"
+#
+#   tags = ["bosh-bastion", "internal"]
+#
+#   boot_disk {
+#     initialize_params {
+#       image = "opsman20"
+#       size  = 50
+#     }
+#   }
+#
+#   network_interface {
+#     subnetwork = "${google_compute_subnetwork.bosh-subnet-1.name}"
+#     access_config {
+#       // Ephemeral IP
+#     }
+#   }
+# }
