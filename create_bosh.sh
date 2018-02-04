@@ -14,8 +14,10 @@ fi
 
 command="$cmd bosh-deployment/bosh.yml \
   -o bosh-deployment/uaa.yml \
-  -o bosh-deployment/config-server.yml \
+  -o bosh-deployment/credhub.yml \
+  -o bosh-deployment/misc/dns.yml \
   -o bosh-deployment/${iaas}/cpi.yml \
+  -o kubo-deployment/configurations/generic/bosh-admin-client.yml \
   -o trusted_certs_ops.yml \
   --vars-store ${iaas}/creds.yml \
   --vars-file ${iaas}/director.yml"
@@ -27,3 +29,5 @@ exec $command
 #   -o bosh-deployment/${iaas}/cpi.yml \
 #   --vars-store ${iaas}/creds.yml \
 #   --vars-file ${iaas}/director.yml
+
+bosh update-runtime-config -n "bosh-deployment/runtime-configs/dns.yml"

@@ -26,6 +26,22 @@ vm_types:
     ram: 4096
     disk: 30_240
 
+- cloud_properties:
+    cpu: 1
+    disk: 20480
+    ram: 4096
+  name: minimal
+- cloud_properties:
+    cpu: 1
+    disk: 20480
+    ram: 4096
+  name: master
+- cloud_properties:
+    cpu: 4
+    disk: 102400
+    ram: 8192
+  name: worker
+
 disk_types:
 - name: medium
   disk_size: 3000
@@ -45,6 +61,18 @@ networks:
     - ((ha_proxy_ip))
     cloud_properties:
       name: ((ert_network_name))
+- name: kubo
+  subnets:
+  - azs:
+    - z1
+    cloud_properties:
+      name: ((kubo_network_name))
+    dns: [((kubo_dns_server))]
+    gateway: ((kubo_internal_gw))
+    range: ((kubo_internal_cidr))
+    reserved: ((kubo_reserved_ips))
+    static: []
+  type: manual
 
 compilation:
   workers: 5

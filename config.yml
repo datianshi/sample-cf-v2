@@ -1,6 +1,6 @@
-ha_proxy_ip: 10.193.63.151
+ha_proxy_ip: 10.193.190.79
 default_network: default
-dns_server: 10.193.63.2
+dns_server: 10.193.190.2
 system_domain: test.shaozhenpcf.com
 ha_proxy_certs: |
   -----BEGIN CERTIFICATE-----
